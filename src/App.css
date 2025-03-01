@@ -1,0 +1,27 @@
+main {
+  /* display: grid; */
+  height: 100vh;
+  grid-template-areas: 
+  "topbar" 
+  "content ";
+  /* grid-template-columns: 0.25fr 2fr ; */
+  /* grid-template-rows: auto auto 70px; */
+  gap: 0.3px;
+}
+header {
+  grid-area: topbar;
+  position: sticky;
+  top: 0;
+}
+aside {
+  grid-area: ads;
+  background-color: purple;
+}
+article {
+  grid-area: content;
+}
+nav {grid-area: sidebar;}
+footer {
+  grid-area: footer;
+  background-color: brown;
+}
