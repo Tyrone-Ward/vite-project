@@ -1,5 +1,6 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { NavLink } from 'react-router-dom'
 
 const user = {
   name: 'Tom Cook',
@@ -8,8 +9,8 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 }
 const navigation = [
-  { name: 'Dashboard', href: '/', current: true },
-  { name: 'Clients', href: 'clients', current: false },
+  { name: 'Dashboard', href: '/', current: false },
+  { name: 'Clients', href: '/clients', current: true },
   // { name: 'Profile', href: '#', current: false },
   // { name: 'Calendar', href: '#', current: false },
   // { name: 'Reports', href: '#', current: false },
@@ -17,7 +18,7 @@ const navigation = [
 const userNavigation = [
   { name: 'Your Profile', href: 'profile' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Sign out', href: 'login' },
 ]
 
 function classNames(...classes) {
@@ -27,14 +28,6 @@ function classNames(...classes) {
 export const Example = () => {
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-gray-100">
-        <body class="h-full">
-        ```
-      */}
       <div className="min-h-full">
         <Disclosure as="nav" className="bg-gray-800">
           <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,17 +43,15 @@ export const Example = () => {
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
                     {navigation.map((item) => (
-                      <a
+                      <NavLink
                         key={item.name}
-                        href={item.href}
-                        aria-current={item.current ? 'page' : undefined}
-                        className={classNames(
-                          item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                          'rounded-md px-3 py-2 text-sm font-medium',
-                        )}
+                        to={item.href}
+                        className={({ isActive }) =>
+                          isActive ?'bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium' : 'text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'
+                        }
                       >
                         {item.name}
-                      </a>
+                      </NavLink>
                     ))}
                   </div>
                 </div>
