@@ -1,4 +1,30 @@
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 const SignIn = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+
+  const navigate = useNavigate()
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch('http://localhost:8080/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email: username, password }),
+    });
+
+    if (response.ok) {
+      // Handle successful login, e.g., redirect to dashboard
+      navigate("/")
+    } else {
+      // Handle login error. Toaster perhaps
+    }
+  }
+
     return (
       <>
         {/*
@@ -22,18 +48,21 @@ const SignIn = () => {
           </div>
   
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" className="space-y-6">
+            {/* <form action="http://localhost:8080/login" method="POST" className="space-y-6"> */}
+            <form onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">
                   Email address
                 </label>
                 <div className="mt-2">
                   <input
+                    value={username}
                     id="email"
                     name="email"
                     type="email"
                     required
                     autoComplete="email"
+                    onChange={(e) => setUsername(e.target.value)} 
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
@@ -55,8 +84,10 @@ const SignIn = () => {
                     id="password"
                     name="password"
                     type="password"
+                    value={password}
                     required
                     autoComplete="current-password"
+                    onChange={(e) => setPassword(e.target.value)}
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                   />
                 </div>
