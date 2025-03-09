@@ -1,6 +1,8 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { NavLink, Link } from 'react-router-dom'
+import { SignOutButton } from '@clerk/clerk-react'
+
 
 const user = {
   name: 'Tom Cook',
@@ -18,7 +20,6 @@ const navigation = [
 const userNavigation = [
   { name: 'Your Profile', href: 'profile' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: 'login' },
 ]
 
 function classNames(...classes) {
@@ -90,6 +91,11 @@ export const Example = () => {
                           </Link>
                         </MenuItem>
                       ))}
+                      <MenuItem >
+                      <Link className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden">
+                        <SignOutButton />
+                      </Link>
+                      </MenuItem>
                     </MenuItems>
                   </Menu>
                 </div>
